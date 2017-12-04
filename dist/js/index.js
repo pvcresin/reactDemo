@@ -18955,25 +18955,27 @@ var App = (_class = function (_Component) {
 			this.setState({ count: this.state.count + 1 });
 		}
 	}, {
-		key: 'updateText',
-		value: function updateText(e) {
+		key: 'onChange',
+		value: function onChange(e) {
 			this.setState({ text: e.currentTarget.value });
 		}
 	}, {
-		key: 'addMemo',
-		value: function addMemo() {
-			var list = this.state.list;
-			list.push(this.state.text);
-			this.setState({ text: '', list: list });
+		key: 'keyDown',
+		value: function keyDown(e) {
+			if (e.keyCode === 13) {
+				var list = this.state.list;
+				list.push(this.state.text);
+				this.setState({ text: '', list: list });
+			}
 		}
 	}, {
 		key: 'render',
 		value: function render() {
-			var list = this.state.list.map(function (l) {
+			var list = this.state.list.map(function (memo, i) {
 				return _react2.default.createElement(
 					'li',
-					null,
-					l
+					{ key: i },
+					memo
 				);
 			});
 			return _react2.default.createElement(
@@ -19002,12 +19004,10 @@ var App = (_class = function (_Component) {
 				_react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement('input', { type: 'text', onChange: this.updateText, value: this.state.text }),
-					_react2.default.createElement(
-						'button',
-						{ onClick: this.addMemo },
-						' add'
-					),
+					_react2.default.createElement('input', { type: 'text',
+						onChange: this.onChange,
+						onKeyDown: this.keyDown,
+						value: this.state.text }),
 					_react2.default.createElement(
 						'ul',
 						null,
@@ -19019,7 +19019,7 @@ var App = (_class = function (_Component) {
 	}]);
 
 	return App;
-}(_react.Component), (_applyDecoratedDescriptor(_class.prototype, 'countUp', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'countUp'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'updateText', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'updateText'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'addMemo', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'addMemo'), _class.prototype)), _class);
+}(_react.Component), (_applyDecoratedDescriptor(_class.prototype, 'countUp', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'countUp'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'onChange', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'onChange'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'keyDown', [_autobindDecorator2.default], Object.getOwnPropertyDescriptor(_class.prototype, 'keyDown'), _class.prototype)), _class);
 exports.default = App;
 
 /***/ }),

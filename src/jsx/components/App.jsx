@@ -17,19 +17,21 @@ export default class App extends Component {
 		this.setState({ count: this.state.count + 1 })
 	}
 	@autobind
-	updateText(e) {
+	onChange(e) {
 		this.setState({ text: e.currentTarget.value })
 	}
 	@autobind
-	addMemo() {
-		const list = this.state.list
-		list.push(this.state.text)
-		this.setState({ text: '', list: list })
+	keyDown(e) {
+		if (e.keyCode === 13) {
+			const list = this.state.list
+			list.push(this.state.text)
+			this.setState({ text: '', list: list })
+		}
 	}
 	render() {
-		const list = this.state.list.map(l => {
+		const list = this.state.list.map((memo, i) => {
 			return (
-				<li>{l}</li>
+				<li key={i}>{memo}</li>
 			)
 		})
 		return (
@@ -40,8 +42,10 @@ export default class App extends Component {
 					<button onClick={this.countUp}>Click Me!</button>
 				</div>
 				<div>
-					<input type="text" onChange={this.updateText} value={this.state.text} />
-					<button onClick={this.addMemo}> add</button>
+					<input type="text"
+						onChange={this.onChange}
+						onKeyDown={this.keyDown}
+						value={this.state.text} />
 					<ul>{list}</ul>
 				</div>
 			</div>
